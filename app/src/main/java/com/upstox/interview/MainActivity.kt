@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -29,8 +28,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.upstox.interview.model.HoldingsUiState
@@ -38,6 +35,7 @@ import com.upstox.interview.model.UserHolding
 import com.upstox.interview.network.RetrofitClient
 import com.upstox.interview.repository.HoldingsRepositoryImpl
 import com.upstox.interview.viewmodel.HoldingsViewModel
+import com.upstox.interview.viewmodel.ViewModelFactory
 import java.util.Locale
 
 class MainActivity : ComponentActivity() {
@@ -46,12 +44,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         val repository = HoldingsRepositoryImpl(RetrofitClient.instance)
-        val viewModelFactory = object : ViewModelProvider.Factory {
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return HoldingsViewModel(repository) as T
-            }
-        }
+        val viewModelFactory = ViewModelFactory(repository)
 
         setContent {
             val viewModel: HoldingsViewModel = viewModel(factory = viewModelFactory)
