@@ -12,9 +12,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.upstox.interview.R
 import com.upstox.interview.utils.formatCurrency
 
 @Composable
@@ -30,9 +32,18 @@ fun SummarySection(
             .background(Color.White)
             .padding(16.dp)
     ) {
-        SummaryRow(label = "Current Value:", value = currentValue)
-        SummaryRow(label = "Total Investment:", value = totalInvestment)
-        SummaryRow(label = "Today's Profit & Loss:", value = todaysPnl)
+        SummaryRow(
+            label = stringResource(id = R.string.current_value_label),
+            value = currentValue
+        )
+        SummaryRow(
+            label = stringResource(id = R.string.total_investment_label),
+            value = totalInvestment
+        )
+        SummaryRow(
+            label = stringResource(id = R.string.todays_pnl_label),
+            value = todaysPnl
+        )
         
         Spacer(modifier = Modifier.height(16.dp))
         
@@ -40,9 +51,13 @@ fun SummarySection(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = "Total Profit & Loss:", fontWeight = FontWeight.Bold, fontSize = 16.sp)
             Text(
-                text = "₹ ${formatCurrency(totalPnl)}",
+                text = stringResource(id = R.string.total_pnl_label),
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp
+            )
+            Text(
+                text = stringResource(id = R.string.currency_format, formatCurrency(totalPnl)),
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp
             )
@@ -59,6 +74,6 @@ fun SummaryRow(label: String, value: Double) {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(text = label, fontWeight = FontWeight.Medium)
-        Text(text = "₹ ${formatCurrency(value)}")
+        Text(text = stringResource(id = R.string.currency_format, formatCurrency(value)))
     }
 }

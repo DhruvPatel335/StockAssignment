@@ -13,10 +13,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.upstox.interview.R
 import com.upstox.interview.model.HoldingsUiState
 import com.upstox.interview.viewmodel.HoldingsViewModel
 
@@ -34,7 +36,7 @@ fun HoldingsScreen(viewModel: HoldingsViewModel) {
                     .padding(vertical = 16.dp, horizontal = 16.dp)
             ) {
                 Text(
-                    text = "Upstox Holding",
+                    text = stringResource(id = R.string.upstox_holding),
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp
